@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Server Pulsa dan PPOB Termurah se Indonesia</title>
+
+    <!-- fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,600;0,700;0,900;1,300;1,400;1,600;1,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- link cta -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+
+    <!-- feather icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- style -->
+    <style>
+      :root {
+        --primary: orange;
+        --bg: #fff;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        outline: none;
+        border: none;
+        text-decoration: none;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg);
+        color: black;
+      }
+
+      /* navbar */
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.2rem 7%;
+        background-color: #f7be0d;
+        border-bottom: 1px solid #fff;
+        position: fixed;
+        top: 8px;
+        right: 8px;
+        left: 8px;
+        border-radius: 15px;
+        z-index: 9999;
+      }
+
+      .navbar-logo {
+        display: inline-block;
+        text-decoration: none;
+      }
+
+      .navbar-logo img {
+        height: 35px; /* Sesuaikan tinggi logo sesuai kebutuhan */
+        width: auto; /* Menjaga rasio gambar */
+        border-radius: 8px; /* Membuat sudut gambar sedikit melengkung */
+        transition: transform 0.3s ease; /* Efek transisi saat di-hover */
+      }
+
+      .navbar-logo img:hover {
+        transform: scale(1.05); /* Sedikit perbesar logo saat di-hover */
+      }
+
+      .navbar .navbar-nav a {
+        color: #fff;
+        display: inline-block;
+        font-size: 1.2rem;
+        margin: 0 1rem;
+      }
+
+      .navbar .navbar-nav a:hover {
+        color: var(--primary);
+      }
+
+      .navbar .navbar-extra a {
+        color: #fff;
+        margin: 0 0.5rem;
+      }
+
+      .navbar .navbar-extra a:hover {
+        color: #010101;
+      }
+
+      #menu {
+        display: none;
+      }
+
+      /* cta section */
+      /* Gaya untuk seluruh section */
+      .cta-section {
+        width: 90;
+        text-align: center;
+        padding: 2rem;
+        background-color: #fff;
+        border-radius: 8px;
+      }
+
+      .intro-text {
+        font-size: 2rem;
+        color: #333;
+        margin-bottom: 1.5rem;
+        margin-top: 1.5rem;
+        font-weight: 600;
+      }
+
+      .cta-image {
+        max-width: 100%;
+        height: auto;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin-bottom: 1.5rem;
+        border-radius: 8px;
+      }
+
+      /* Gaya tombol CTA dengan ikon WhatsApp */
+      .cta-button {
+        background-color: #25d366;
+        color: #fff;
+        padding: 1rem 1.5rem;
+        font-size: 2rem;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-weight: 600;
+      }
+
+      .cta-button:hover {
+        background-color: #1ebd5d;
+      }
+
+      /* section */
+
+      .container {
+        padding: 2rem;
+      }
+
+      .slider-wrapper {
+        position: relative;
+        max-width: 48rem;
+        margin: 0 auto;
+      }
+
+      .slider {
+        display: flex;
+        aspect-ratio: 16/9;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        box-shadow: 0 0.5rem 3rem -0.75rem hsla(0, 0%, 0%, 0.25);
+        border-radius: 0.5rem;
+        overflow: hidden;
+      }
+
+      .slider img {
+        flex: 1 0 100%;
+        scroll-snap-align: start;
+        object-fit: cover;
+      }
+
+      .slider-nav {
+        display: flex;
+        column-gap: 1rem;
+        position: absolute;
+        bottom: 1.2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1;
+      }
+
+      .slider-nav a {
+        width: 0.5rem;
+        height: 0.5rem;
+        border-radius: 50%;
+        background-color: #fff;
+        opacity: 0.75;
+        transition: opacity ease 250ms;
+      }
+
+      .slider-nav a:hover {
+        opacity: 1;
+      }
+
+      /* button daftar */
+      .container-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 10vh; /* Membuat div memiliki tinggi penuh layar */
+        background-color: #fff; /* Warna latar belakang */
+      }
+
+      .btn-daftar {
+        display: flex;
+        background-color: #f7be0d; /* Warna latar belakang tombol (hijau) */
+        color: #fff; /* Warna teks tombol */
+        border: none; /* Menghilangkan border */
+        padding: 1rem 1.5rem; /* Memberikan padding pada tombol */
+        font-size: 2rem; /* Ukuran teks tombol */
+        border-radius: 15px; /* Membuat sudut tombol melengkung */
+        cursor: pointer; /* Mengubah kursor saat hover */
+        transition: background-color 0.3s ease, transform 0.3s ease; /* Menambahkan transisi untuk hover */
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .btn-daftar:hover {
+        background-color: #218838; /* Warna tombol saat di-hover */
+        transform: scale(1.05); /* Efek memperbesar sedikit saat di-hover */
+      }
+
+      /* about section */
+      .about {
+        padding: 2rem 7% 1.4rem;
+      }
+
+      .about h2 {
+        text-align: center;
+        font-size: 2.6rem;
+        padding-bottom: 3rem;
+      }
+
+      .about h2 span {
+        color: var(--primary);
+      }
+
+      .about .row {
+        display: flex;
+      }
+
+      .about .row .about-img {
+        flex: 1 1 20rem;
+      }
+
+      .about .row .about-img img {
+        width: 90%;
+      }
+
+      .about .row .content {
+        flex: 1 1 40%;
+      }
+
+      .about .row .content h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+      }
+
+      .about .row .content p {
+        text-align: justify;
+      }
+
+      /* paket section */
+      .paket {
+        padding: 2rem 7% 1.4rem;
+      }
+
+      .paket h2 {
+        text-align: center;
+        font-size: 2.6rem;
+        padding-bottom: 3rem;
+      }
+
+      .paket h2 span {
+        color: var(--primary);
+      }
+
+      .paket .row {
+        display: flex;
+      }
+
+      .paket .row .paket-img {
+        flex: 1 1 15rem;
+        margin-top: 50px;
+      }
+
+      .paket .row .paket-img img {
+        display: flex;
+        width: 35%;
+        margin: 1rem 6rem auto;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Menambahkan shadow */
+      }
+
+      .paket .row .content {
+        flex: 1 1 50%;
+        margin-top: 20px;
+      }
+
+      .paket .row .content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .paket .row .content p {
+        font-size: 1.3;
+      }
+
+      main {
+        flex-grow: 1; /* Memastikan konten utama mendorong footer ke bawah */
+      }
+
+      footer {
+        position: fixed; /* Tetap di bawah meski konten lebih pendek */
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: #fff; /* Latar belakang footer */
+        text-align: center;
+      }
+
+      footer img {
+        max-width: 380px; /* Ukuran gambar maksimal */
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      /* button daftar */
+
+      /* media queries */
+
+      /* desktop */
+      @media (max-width: 1336px) {
+        html {
+          font-size: 75%;
+        }
+      }
+
+      /* tablet */
+      @media (max-width: 768px) {
+        html {
+          font-size: 62.5%;
+        }
+
+        #menu {
+          display: inline-block;
+        }
+
+        .navbar .navbar-nav {
+          position: absolute;
+          top: 100%;
+          right: -100%;
+          background-color: orange;
+          width: 20rem;
+          height: 100vh;
+          transition: 0.5s;
+        }
+
+        .navbar .navbar-nav.active {
+          right: 0;
+        }
+
+        .navbar .navbar-nav a {
+          color: #fff;
+          display: block;
+          margin: 1.5rem;
+          padding: 0.5rem;
+          font-size: 1.3rem;
+        }
+
+        .navbar .navbar-nav a:hover {
+          color: #010101;
+        }
+
+        .btn-daftar {
+          width: 100%;
+          height: 90%;
+          text-align: center;
+          font-weight: 700;
+          font-size: 2rem;
+        }
+      }
+
+      /* mobile */
+      @media (max-width: 450px) {
+        html {
+          font-size: 55%;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- navbar -->
+    <nav class="navbar">
+      <a href="#" class="navbar-logo"
+        ><img src="logo-pm.jpeg" alt="Nusantara Cell Logo"
+      /></a>
+
+      <div class="navbar-nav">
+        <a href="#home">Home</a>
+        <a href="#about">Tentang Kami</a>
+        <a href="#paket">Pilihan Paket</a>
+        <a href="#contact">Kontak Kami</a>
+      </div>
+
+      <div class="navbar-extra">
+        <a href="#" id="search"><i data-feather="search"></i></a>
+        <a href="#" id="menu"><i data-feather="menu"></i></a>
+      </div>
+    </nav>
+    <!-- navbar end -->
+
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <!-- cta section -->
+    <section class="cta-section">
+      <p class="intro-text">AGEN PULSA TERMURAH SE-INDONESIA!!!</p>
+      <img src="diskon.jpeg" alt="Gambar Layanan" class="cta-image" />
+      <p class="intro-text">Jangan Lewatkan!</p>
+      <p class="intro-text">Promo potongan khusus Pendaftaran hari ini</p>
+      <button class="cta-button">
+        <a href="https://wa.me/6289676381340" class="cta-button">
+          <i class="fab fa-whatsapp"></i> Daftar Via WhatsApp
+        </a>
+      </button>
+    </section>
+
+    <!-- section slider -->
+    <section class="container">
+      <div class="slider-wrapper">
+        <div class="slider">
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+          <img id="slide-1" src="img-1.jpeg" alt="nusantara cell image" />
+          <img id="slide-2" src="img-2.jpeg" alt="nusantara cell image" />
+        </div>
+        <div class="slider-nav">
+          <a href="#slide-1"></a>
+          <a href="#slide-2"></a>
+          <a href="#slide-3"></a>
+        </div>
+
+        <p class="intro-text" style="text-align: justify">
+          Perhitungan keuntungan yang anda dapatkan dengan menjadi agen kami,
+          dimana untuk menjual pulsa 5.000 dengan menggunakan aplikasi kami anda
+          hanya mengunakan saldo sebesar 4.200, jika anda menjual dengan harga
+          5.000 anda masih mempunyai keuntungan sebesar 800 rupiah. semakin
+          besar jumlah pulsa yang anda jual maka semakin tinggi pula potongan
+          dan keuntungan yang anda dapatkan
+        </p>
+      </div>
+    </section>
+    <!-- section end -->
+
+    <!-- daftar -->
+    <div class="container-button">
+      <a href="pendaftaran.html" style="text-decoration: none">
+        <button class="btn-daftar">DAFTAR SEKARANG</button>
+      </a>
+    </div>
+
+    <!-- daftar end -->
+
+    <!-- layanan -->
+    <section id="paket" class="paket">
+      <h2 style="font-size: 3rem; color: red; bottom: 0">Pilihan Paket</h2>
+      <p class="intro-text" style="text-align: center; top: 0">
+        Promo Cashback untuk pengaktifan paket agen khusus hari ini!!
+      </p>
+
+      <div class="row">
+        <div class="content">
+          <h3>Paket Agen Biasa</h3>
+
+          <p style="text-align: justify">
+            Minimal Topup Rp 500.000,- + Bonus Pendafaran 100.000,- saldo yang
+            masuk ke akun anda Rp, 600.000,- Melayani pengisian Pulsa All
+            operator, termasuk pengisian pulsa listrik.
+          </p>
+        </div>
+
+        <div class="paket-img">
+          <img src="paket-1.jpeg" alt="paket kami" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="content">
+          <h3>Paket Agen Master</h3>
+
+          <p style="text-align: justify">
+            Minimal Topup Rp 1.000.000,- + Bonus Pendafaran 200.000,- saldo yang
+            masuk ke akun anda Rp 1.200.000,- Melayani pengisian Pulsa All
+            operator, termasuk pengisian pulsa listrik dan paket data/paket
+            kuota/paket nelpon.
+          </p>
+        </div>
+
+        <div class="paket-img">
+          <img src="paket-2.jpeg" alt="paket kami" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="content">
+          <h3>Paket Agen Master Dealer</h3>
+
+          <p style="text-align: justify">
+            Minimal Topup Rp 3.000.000,- + Bonus Pendafaran 300.000,- saldo yang
+            masuk ke akun anda Rp 3.300.000,- 24 jam semua transaksi, bisa
+            melakukan transfer/tarik saldo ke rekening atau dompet digital
+          </p>
+        </div>
+
+        <div class="paket-img">
+          <img src="paket-3.jpeg" alt="paket kami" />
+        </div>
+      </div>
+    </section>
+    <!-- layanan end -->
+
+    <!-- cta section -->
+    <section class="cta-section">
+      <p class="intro-text">
+        Jangan Lewatkan kesempatan untuk memulai bisnis anda
+      </p>
+      <button class="cta-button">
+        <a href="https://wa.me/6289676381340" class="cta-button">
+          <i class="fab fa-whatsapp"></i> Daftar Via WhatsApp
+        </a>
+      </button>
+      <p class="intro-text">
+        Daftar Sekarang Juga melalu wesbsite ini atau langsung hubungi kami
+        melalui WhatsApp di bawah ini
+      </p>
+    </section>
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <!-- js slider -->
+    <script>
+      const slider = document.querySelector(".slider");
+      const slides = document.querySelectorAll(".slider img");
+      const totalSlides = slides.length;
+      const navLinks = document.querySelectorAll(".slider-nav a");
+
+      let currentIndex = 0;
+      let slideInterval;
+      const slideDuration = 3000; // Durasi setiap slide
+
+      // Fungsi untuk menampilkan slide
+      function showSlide(index, smooth = true) {
+        const sliderWidth = slider.offsetWidth;
+
+        // Scroll ke posisi yang tepat dengan atau tanpa animasi halus
+        slider.scrollTo({
+          left: index * sliderWidth,
+          behavior: smooth ? "smooth" : "auto",
+        });
+
+        // Update navigasi (bulatan)
+        navLinks.forEach((link) => (link.style.opacity = 0.75));
+        navLinks[index % totalSlides].style.opacity = 1;
+      }
+
+      // Fungsi otomatis untuk berpindah slide
+      function autoSlide() {
+        currentIndex++;
+
+        // Jika sudah mencapai slide terakhir
+        if (currentIndex >= totalSlides) {
+          // Pindah instan ke slide pertama tanpa animasi
+          currentIndex = 0; // Reset ke slide pertama
+          showSlide(currentIndex, false); // Jangan animasikan transisinya
+        } else {
+          // Pindah ke slide berikutnya secara smooth
+          showSlide(currentIndex);
+        }
+      }
+
+      // Mulai perpindahan otomatis
+      slideInterval = setInterval(autoSlide, slideDuration); // Ubah slide setiap 3 detik
+
+      // Manual navigasi menggunakan tombol navigasi
+      navLinks.forEach((link, index) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          clearInterval(slideInterval); // Hentikan auto-slide saat user menavigasi secara manual
+          currentIndex = index; // Update currentIndex sesuai klik
+          showSlide(currentIndex); // Tampilkan slide yang dipilih
+          slideInterval = setInterval(autoSlide, slideDuration); // Restart auto-slide
+        });
+      });
+
+      // Inisialisasi slide pertama
+      showSlide(currentIndex);
+    </script>
+
+    <!-- js button -->
+
+    <script>
+      function showLoading(url) {
+        // Mengarahkan pengguna ke halaman tujuan setelah tombol diklik
+        window.location.href = url;
+      }
+    </script>
+
+    <!-- feather icons -->
+    <script>
+      feather.replace();
+    </script>
+
+    <!-- js navbar -->
+    <script>
+      // toggle class active
+      const navbarNav = document.querySelector(".navbar-nav");
+      // ketika menu di klik
+      document.querySelector("#menu").onclick = () => {
+        navbarNav.classList.toggle("active");
+      };
+      // klik dimana saja untuk tutup menu
+      const menu = document.querySelector("#menu");
+
+      document.addEventListener("click", function (e) {
+        if (!menu.contains(e.target) && !navbarNav.contains(e.target)) {
+          navbarNav.classList.remove("active");
+        }
+      });
+    </script>
+  </body>
+</html>
